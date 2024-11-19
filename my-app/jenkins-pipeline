@@ -1,0 +1,49 @@
+#!/usr/bin/env groovy
+
+pipeline{
+    agent any
+    stages{
+        stage('Validate the Application'){
+            steps{
+                script{
+	                bat 'mvn validate'
+                }
+            }
+        }
+        stage('Compiling the Application'){
+            steps{
+                script{
+	                bat 'mvn compile'
+                }
+            }
+        }
+        stage('Testing the Application'){
+            steps{
+                script{
+	                bat 'mvn test'
+                }
+            }
+        }
+        stage('Package Application'){
+            steps{
+                script{
+	                bat 'mvn package'
+                }
+            }
+        }
+	stage('Install application locally'){
+            steps{
+                script{
+	                bat 'mvn install'
+                }
+            }
+        }
+	stage('Deploy the Application on local server'){
+            steps{
+                script{
+	                bat 'mvn deploy'
+                }
+            }
+        }
+    }
+}
